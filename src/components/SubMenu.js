@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const SidebarLink = styled(Link)`
   display: flex;
-  color: #e1e9fc;
+  color: #000;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
@@ -12,9 +12,12 @@ const SidebarLink = styled(Link)`
   height: 60px;
   text-decoration: none;
   font-size: 18px;
+  background: #d9d9d9;
+  margin: 0px 10px 20px 10px;
+  border-radius: 10px;
 
   &:hover {
-    background: #252831;
+    background: #d9d9d9;
     border-left: 4px solid #632ce4;
     cursor: pointer;
   }
@@ -22,16 +25,26 @@ const SidebarLink = styled(Link)`
 
 const SidebarLabel = styled.span`
   margin-left: 16px;
+  font-size: 18px;
+  font-family: Poppins;
+`;
+
+const RoundIcon = styled.div`
+  background: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
 `;
 
 const DropdownLink = styled(Link)`
-  background: #414757;
+  background: #fff;
+  color: #000;
   height: 60px;
   padding-left: 3rem;
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #f5f5f5;
   font-size: 18px;
 
   &:hover {
@@ -47,9 +60,19 @@ const SubMenu = ({ item }) => {
 
   return (
     <>
-      <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
-        <div>
-          {item.icon}
+      <SidebarLink
+        to={item.path}
+        onClick={item.subNav && showSubnav}
+        style={{ marginBottom: "20px" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <RoundIcon>{item.icon}</RoundIcon>
           <SidebarLabel>{item.title}</SidebarLabel>
         </div>
         <div>
@@ -60,11 +83,11 @@ const SubMenu = ({ item }) => {
             : null}
         </div>
       </SidebarLink>
+
       {subnav &&
         item.subNav.map((item, index) => {
           return (
             <DropdownLink to={item.path} key={index}>
-              {item.icon}
               <SidebarLabel>{item.title}</SidebarLabel>
             </DropdownLink>
           );
